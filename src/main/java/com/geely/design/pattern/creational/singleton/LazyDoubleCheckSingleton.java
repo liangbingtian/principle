@@ -10,7 +10,7 @@ public class LazyDoubleCheckSingleton {
   //volatile关键字可以为我们实现线程安全的延迟初始化,这样重排序就会被禁止,cpu有共享内存,
   //加了该关键字后，所有线程都可以看见共享内存的状态。保证了内存的可见性。
   //加了这个之后就不允许下边注释的步骤重排序。
-  private volatile static LazyDoubleCheckSingleton lazyDoubleCheckSingleton = null;
+  private static LazyDoubleCheckSingleton lazyDoubleCheckSingleton = null;
 
   private LazyDoubleCheckSingleton() {
 

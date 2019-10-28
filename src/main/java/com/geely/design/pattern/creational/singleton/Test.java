@@ -30,24 +30,29 @@ public class Test {
 
     //通过序列化和反序列化破坏单例
 //    HungrySingleton instance = HungrySingleton.getInstance();
-//    ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("singleton_file"));
-//    oos.writeObject(instance);
-//
-//    File file = new File("singleton_file");
-//    ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file));
+    EnumInstance instance = EnumInstance.getInstance();
+    ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("singleton_file"));
+    oos.writeObject(instance);
+
+    File file = new File("singleton_file");
+    ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file));
 //    HungrySingleton newInstance = (HungrySingleton) ois.readObject();
+    EnumInstance newInstance = (EnumInstance) ois.readObject();
+    System.out.println(instance);
+    System.out.println(newInstance);
+    System.out.println(instance == newInstance);
+
+
+    Class objectClass = EnumInstance.class;
+    //虽然已经使用私有构造器使得对象无法从外部构造，但是我们可以使用反射把构造器的权限打开。
+    Constructor constructor = objectClass.getDeclaredConstructor(String.class, int.class);
+    constructor.setAccessible(true);
+    EnumInstance enumInstance = (EnumInstance) constructor.newInstance("Geely", 666);
+//    HungrySingleton instance = HungrySingleton.getInstance();
+//    HungrySingleton newInstance = (HungrySingleton) constructor.newInstance();
 //
 //    System.out.println(instance == newInstance);
-
-
-    Class objectClass = HungrySingleton.class;
-    //虽然已经使用私有构造器使得对象无法从外部构造，但是我们可以使用反射把构造器的权限打开。
-    Constructor constructor = objectClass.getDeclaredConstructor();
-    constructor.setAccessible(true);
-    HungrySingleton instance = HungrySingleton.getInstance();
-    HungrySingleton newInstance = (HungrySingleton) constructor.newInstance();
-
-    System.out.println(instance == newInstance);
+    enumInstance.printTest();
 
   }
 

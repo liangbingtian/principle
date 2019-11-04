@@ -52,4 +52,24 @@ public class SingletonTest {
       System.out.println(Thread.currentThread().getName() + " " + instance);
     }
   }
+
+  /**
+   * ThreadLocal单例模式。
+   */
+  @Test
+  public void test4() {
+    Thread t1 = new Thread(new ThreadLocalT());
+    Thread t2 = new Thread(new ThreadLocalT());
+    t1.start();
+    t2.start();
+    System.out.println("program end");
+  }
+
+  private class ThreadLocalT implements Runnable {
+
+    public void run() {
+      ThreadLocalInstance threadLocalInstance = ThreadLocalInstance.getInstance();
+      System.out.println(Thread.currentThread().getName() + " " + threadLocalInstance);
+    }
+  }
 }

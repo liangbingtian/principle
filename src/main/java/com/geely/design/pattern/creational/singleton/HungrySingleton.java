@@ -7,7 +7,7 @@ import java.io.Serializable;
  *
  * @author liangbingtian
  */
-public class HungrySingleton implements Serializable {
+public class HungrySingleton implements Serializable,Cloneable {
 
   //在类加载的时候就对其进行初始化
   private static final HungrySingleton hungrySingleton = new HungrySingleton();
@@ -27,4 +27,8 @@ public class HungrySingleton implements Serializable {
     }
   }
 
+  @Override
+  protected Object clone() throws CloneNotSupportedException {
+    return super.clone();
+  }
 }
